@@ -1,12 +1,17 @@
 import React from 'react';
 import Amplify from 'aws-amplify';
-import {AmplifyAuthenticator, AmplifySignUp} from '@aws-amplify/ui-react';
-import {AuthState, onAuthUIStateChange} from '@aws-amplify/ui-components';
+import { AmplifyAuthenticator, AmplifySignUp } from '@aws-amplify/ui-react';
+import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
 import awsconfig from './aws-exports';
 
-import {HashRouter, Switch, Route, Redirect} from 'react-router-dom';
+import {
+  HashRouter,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 
-import {makeStyles, createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
+import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import AllPosts from './containers/AllPosts';
@@ -23,25 +28,27 @@ const theme = createMuiTheme({
     type: 'dark',
     primary: {
       main: '#1EA1F2',
-      contrastText: "#fff"
+      contrastText: "#fff",
     },
     background: {
       default: '#15202B',
-      paper: '#15202B'
+      paper: '#15202B',
     },
-    divider: '#37444C'
+    divider: '#37444C',
   },
   overrides: {
     MuiButton: {
-      color: 'white'
-    }
+      color: 'white',
+    },
   },
   typography: {
-    fontFamily: ['Arial'].join(',')
+    fontFamily: [
+      'Arial',
+    ].join(','),
   },
   status: {
-    danger: 'orange'
-  }
+    danger: 'orange',
+  },
 });
 
 const useStyles = makeStyles(theme => ({
@@ -50,24 +57,24 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     width: 800,
     marginLeft: 'auto',
-    marginRight: 'auto'
+    marginRight: 'auto',
   },
   appBar: {
-    marginLeft: drawerWidth
+    marginLeft: drawerWidth,
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0
+    flexShrink: 0,
   },
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
   },
   toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing(3)
-  }
+    padding: theme.spacing(3),
+  },
 }));
 
 const App = () => {
@@ -83,32 +90,33 @@ const App = () => {
     });
   }, []);
 
-  return authState === AuthState.SignedIn && user
-    ? (<div className={classes.root}>
+  return authState === AuthState.SignedIn && user ? (
+    <div className={classes.root} >
       <ThemeProvider theme={theme}>
-        <CssBaseline/>
+        <CssBaseline />
         <HashRouter>
           <Switch>
-            <Route exact="exact" path='/' component={Timeline}/>
-            <Route exact="exact" path='/global-timeline' component={AllPosts}/>
-            <Route exact="exact" path='/search' component={Search}/>
-            <Route exact="exact" path='/:userId' component={PostsBySpecifiedUser}/>
-            <Redirect path="*" to="/"/>
+            <Route exact path='/' component={Timeline} />
+            <Route exact path='/global-timeline' component={AllPosts} />
+            <Route exact path='/search' component={Search} />
+            <Route exact path='/:userId' component={PostsBySpecifiedUser}/>
+            <Redirect path="*" to="/" />
           </Switch>
         </HashRouter>
       </ThemeProvider>
-    </div>)
-    : (<AmplifyAuthenticator>
-      <AmplifySignUp slot="sign-up" formFields={[
-          {
-            type: "username"
-          }, {
-            type: "password"
-          }, {
-            type: "email"
-          }
-        ]}/>
-    </AmplifyAuthenticator>);
+    </div>
+  ) : (
+    <AmplifyAuthenticator>
+      <AmplifySignUp
+        slot="sign-up"
+        formFields={[
+          { type: "username" },
+          { type: "password" },
+          { type: "email" }
+        ]}
+      />
+    </AmplifyAuthenticator>
+  );
 }
 
 export default App;
