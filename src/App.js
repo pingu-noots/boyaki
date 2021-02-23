@@ -27,14 +27,14 @@ const theme = createMuiTheme({
   palette: {
     type: 'dark',
     primary: {
-      main: '#1EA1F2',
-      contrastText: "#fff",
+      main: 'rgb(107, 241, 217)',
+      contrastText: "rgb(0, 5, 1)",
     },
     background: {
       default: '#15202B',
       paper: '#15202B',
     },
-    divider: '#37444C',
+    divider: '#68f2e6',
   },
   overrides: {
     MuiButton: {

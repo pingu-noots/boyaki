@@ -11,7 +11,10 @@ import {
   Avatar,
   Typography,
   CircularProgress,
+  ListItemIcon
 } from '@material-ui/core';
+
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 import { useHistory } from 'react-router';
 import moment from 'moment';
@@ -21,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     wordBreak: 'break-all',
     overflow: 'scroll',
-    borderRight: '1px solid #37444C',
+    borderRight: '1px solid #68f2e6',
   },
   alignCenter: {
     textAlign: 'center',
@@ -37,8 +40,10 @@ const useStyles = makeStyles(theme => ({
     position: 'sticky',
     top: 0,
     zIndex: 1200,
-    backgroundColor: '#15202B',
-    borderBottom: '1px solid #37444C',
+    backgroundColor: 'rgb(107, 241, 217)',
+    borderBottom: '1px solid #68f2e6',
+    color: "rgb(0, 5, 1)",
+    fontStyle: 'italic',
   },
   clickable: {
     cursor: 'pointer',
@@ -60,7 +65,7 @@ export default function PostList({ isLoading, posts, getAdditionalPosts, listHea
             className={classes.listHeader}
           >
             <Typography
-              variant='h5'
+              variant='h3'
               fontWeight="fontWeightBold"
               maxWidth
             >
@@ -110,7 +115,8 @@ function PostItem({ post }) {
   }
 
   return (
-    <ListItem alignItems='flex-start' key={post.id}>
+  <List>
+    <ListItem key={post.id}>
       <ListItemAvatar>
         <div className={classes.clickable} onClick={() => history.push('/' + post.owner)}>
           <Avatar alt={post.owner} src='/' />
@@ -136,6 +142,17 @@ function PostItem({ post }) {
           </Typography>
         }
       />
-    </ListItem>
+
+
+      <ListItemIcon>
+        <div className={classes.clickable} onClick={() => history.push('/' + post.owner)}>
+          <HighlightOffIcon alt={post.owner} src='/' />
+        </div>
+
+      </ListItemIcon>
+
+
+</ListItem>
+</List>
   )
 }
